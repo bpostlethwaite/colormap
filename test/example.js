@@ -1,14 +1,30 @@
 var cmap = require('./..')
 
 var canvas = document.getElementById('canvas')
-, c = canvas.getContext('2d')
+  , c = canvas.getContext('2d')
 
-var cg = cmap({'colormap': 'copper', 'nshades': 64 })
 
-var i
-for (i = 0; i < cg.length; ++i) {
-  c.fillStyle = cg[i] // start ind at index 0
-  c.fillRect(i*10, 1, 10, 40)
-  c.fillStyle = cg[i] // start ind at index 0
-  c.fillRect(i*10, 41, 10, 40)
+var n = 48
+
+var cms = ['jet', 'hsv' ,'hot', 'cool', 'spring', 'summer', 'autumn',
+           'winter', 'gray', 'bone', 'copper']
+
+//c.fillStyle = "#FFFFFF" // start ind at index 0
+//c.fillRect(0, 0, 1000, 600)
+
+var i, j, cg
+for (i = 0; i < cms.length; i++) {
+  cg = cmap({'colormap': cms[i], 'nshades': n })
+
+  for (j = 0; j < n; j++) {
+    c.fillStyle = cg[j] // start ind at index 0
+    c.fillRect(j*10, i*40, 10, 40)
+
+  }
+  c.fillStyle = "#262626"
+  c.font = "16px Helvetica";
+  c.fillText( cms[i], n*10 + 10, i * 40 + 26);
 }
+
+//var img    = canvas.toDataURL("image/png")
+//document.write('<img src="'+img+'"/>')
