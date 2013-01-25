@@ -1,3 +1,8 @@
+/*
+ * Ben Postlethwaite
+ * January 2013
+ * License MIT
+ */
 "use strict";
 var cg = require('colorgrad')()
 var at = require('arraytools')()
@@ -201,7 +206,7 @@ module.exports = function (spec) {
   
 
   /*
-   * colormap functions
+   * colormap function
    *
    */
    function buildmap(cmap, n) {
@@ -219,7 +224,7 @@ module.exports = function (spec) {
        val = cmap[key[i]][1].map(function(x) { return x * 255 })
 
       /*
-       * Then build linear values from x axis point to x axis point
+       * Build linear values from x axis point to x axis point
        * and from rgb value to value
        */
        res[i] = at.graph( div, val ).map( Math.round )
