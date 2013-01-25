@@ -9,6 +9,7 @@ lib-cov
 
 node_modules/*
 .c9revisions/*
+bundle.js
 
 pids
 logs
