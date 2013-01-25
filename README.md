@@ -52,4 +52,6 @@ for (i = 0; i < cms.length; i++) {
   c.fillText( cms[i], n*10 + 10, i * 40 + 26);
 }
 ```
+
 Then just [browserify](https://github.com/substack/node-browserify) it and throw it in some html and it will output the image above!
+
