@@ -1,6 +1,6 @@
 {
   "name": "colormap",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "get sweet rgb or hex colormaps",
   "main": "index.js",
   "scripts": {
