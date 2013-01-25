@@ -7,13 +7,13 @@ Output colormaps in hex or rgb. Note: these are based on [Matlab's colormaps](ht
 Super simple just do,
 ```javascript
 options = {
-  colormap: "jet"
-, nshades: 72
-, format: "hex"
+  colormap: "jet"   // pick your colormap
+, nshades: 72       // how many divisions
+, format: "hex"     // "hex" or "rgb"
 }
 cg = colormap(options)
 ```
-where leaving `options = {}` or `undefined` results in the defaults given above.
+where leaving `options = {}` or `undefined` results in the defaults given above. There is a minimum number of `nshades` divisions you can select since the algorithms for each colormap have different requirements. `colormap` throws an error if there are too few divisions for the chosen colormap and gives the minimum number required. You should be safe with `n > 10` for all the colormaps, though some require much less (much simpler to implemenent).
 
 Here is a more complete example which also defines all the currently available color maps.
 
