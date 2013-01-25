@@ -19,8 +19,6 @@ module.exports = function (spec) {
   spec.format = spec.format || "hex"
 
 
-
-
   /*
    * Supported colormaps
    */
@@ -214,6 +212,14 @@ module.exports = function (spec) {
     var div, val, res = []
     var key = ['r', 'g', 'b']
     for (var i = 0; i < 3; i++) {
+      /*
+       * Check inputs
+       */
+       if (cmap[key[i]][0].length > spec.nshades) {
+          throw new Error(spec.colormap + 
+            ' map requires nshades to be at least size ' + cmap[key[i]][0].length)
+       }
+
       /*
        * map x axis point from 0->1 to 0 -> n 
        */
