@@ -1,5 +1,6 @@
 # colormap
 
+<<<<<<< HEAD
 Output colormaps in hex or rgb. Note: these are based on [Matlab's colormaps](http://www.mathworks.com/help/matlab/ref/colormap.html)
 
 ![all colormap output](http://img89.imageshack.us/img89/9401/newcolourthing.png)
@@ -13,6 +14,16 @@ options = {
 , format: "hex"
 }
 
+=======
+Output colormaps in hex or rgb. Super simple just do,
+```javascript
+options = {
+  colormap: "jet"
+, nshades: 72
+, format: "hex"
+}
+
+>>>>>>> origin/master
 cg = colormap(options)
 ```
 where leaving `options = {}` or `undefined` results in the defaults given above.
@@ -52,4 +63,13 @@ for (i = 0; i < cms.length; i++) {
   c.fillText( cms[i], n*10 + 10, i * 40 + 26);
 }
 ```
+<<<<<<< HEAD
 Then just [browserify](https://github.com/substack/node-browserify) it and throw it in some html and it will output the image above!
+=======
+which outputs
+
+![all colormap output](http://img89.imageshack.us/img89/9401/newcolourthing.png)
+
+
+Then just [browserify](https://github.com/substack/node-browserify) it and throw it in some html!
+>>>>>>> origin/master
