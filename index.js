@@ -5,7 +5,7 @@
  */
 "use strict";
 var cg = require('colorgrad')()
-var at = require('arraytools')()
+var at = require('arraytools')
 
 module.exports = function (spec) {
 
@@ -188,7 +188,7 @@ module.exports = function (spec) {
       ]
 
     }
-  } 
+  }
 
   /*
    * apply map and convert result if needed
@@ -201,7 +201,7 @@ module.exports = function (spec) {
     })
   } else result = carray
 
-  
+
 
   /*
    * colormap function
@@ -216,12 +216,12 @@ module.exports = function (spec) {
        * Check inputs
        */
        if (cmap[key[i]][0].length > spec.nshades) {
-          throw new Error(spec.colormap + 
+          throw new Error(spec.colormap +
             ' map requires nshades to be at least size ' + cmap[key[i]][0].length)
        }
 
       /*
-       * map x axis point from 0->1 to 0 -> n 
+       * map x axis point from 0->1 to 0 -> n
        */
        div = cmap[key[i]][0].map(function(x) { return x * n }).map( Math.round )
       /*
@@ -242,7 +242,7 @@ module.exports = function (spec) {
    }
 
 
-   return result   
-  
+   return result
+
 
 }
