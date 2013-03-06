@@ -2,6 +2,8 @@
 
 Output colormaps in hex or rgb. Note: these are based on [Matlab's colormaps](http://www.mathworks.com/help/matlab/ref/colormap.html)
 
+[![Build Status](https://travis-ci.org/bpostlethwaite/colorgrad.png?branch=master)](https://travis-ci.org/bpostlethwaite/colorgrad)
+
 ![all colormap output](http://img89.imageshack.us/img89/9401/newcolourthing.png)
 
 Super simple just do,

@@ -1,9 +1,9 @@
 {
   "name": "colormap",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "get sweet rgb or hex colormaps",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -11,18 +11,20 @@
   },
   "keywords": [
     "colormap",
+    "color map",
     "color",
     "hex",
     "rgb",
-    "colorgradient",
-    "colorrange"
+    "color gradient",
+    "color range",
+    "plot",
+    "graph"
   ],
   "author": "bpostlethwaite",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "arraytools": ">=0.0.1",
-    "colorgrad": ">=0.1.0"
+    "arraytools": ">=0.1.2"
   },
   "devDependencies": {
     "tap": ">0.2",

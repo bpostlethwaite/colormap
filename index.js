@@ -219,9 +219,9 @@ module.exports = function (spec) {
        }
 
       /*
-       * map x axis point from 0->1 to 0 -> n
+       * map x axis point from 0->1 to 0 -> n-1
        */
-       div = cmap[key[i]][0].map(function(x) { return x * n }).map( Math.round )
+       div = cmap[key[i]][0].map(function(x) { return x * (n-1) }).map( Math.round )
       /*
        * map 0 -> 1 rgb value to 0 -> 255
        */
@@ -231,7 +231,7 @@ module.exports = function (spec) {
        * Build linear values from x axis point to x axis point
        * and from rgb value to value
        */
-       res[i] = at.graph( div, val ).map( Math.round )
+       res[i] = at.lines( div, val ).map( Math.round )
      }
     /*
      * Then zip up 3xn vectors into nx3 vectors
