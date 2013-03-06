@@ -432,7 +432,7 @@ process.binding = function (name) {
 
 });
 
-require.define("/package.json",function(require,module,exports,__dirname,__filename,process,global){module.exports = {"main":"index.js"}
+require.define("/package.json",function(require,module,exports,__dirname,__filename,process,global){module.exports = {}
 });
 
 require.define("/index.js",function(require,module,exports,__dirname,__filename,process,global){/*
@@ -440,9 +440,7 @@ require.define("/index.js",function(require,module,exports,__dirname,__filename,
  * January 2013
  * License MIT
  */
-"use strict";
-var cg = require('colorgrad')()
-var at = require('arraytools')()
+var at = require('arraytools')
 
 module.exports = function (spec) {
 
@@ -454,8 +452,6 @@ module.exports = function (spec) {
   spec.colormap = spec.colormap || "jet"
   spec.nshades = spec.nshades || 72
   spec.format = spec.format || "hex"
-
-
 
 
   /*
@@ -627,7 +623,7 @@ module.exports = function (spec) {
       ]
 
     }
-  } 
+  }
 
   /*
    * apply map and convert result if needed
@@ -636,11 +632,11 @@ module.exports = function (spec) {
    var result = []
    if (spec.format === "hex") {
     carray.forEach( function (ar) {
-      result.push( cg.rgb2hex(ar) )
+      result.push( rgb2hex(ar) )
     })
   } else result = carray
 
-  
+
 
   /*
    * colormap function
@@ -652,7 +648,15 @@ module.exports = function (spec) {
     var key = ['r', 'g', 'b']
     for (var i = 0; i < 3; i++) {
       /*
-       * map x axis point from 0->1 to 0 -> n 
+       * Check inputs
+       */
+       if (cmap[key[i]][0].length > spec.nshades) {
+          throw new Error(spec.colormap +
+            ' map requires nshades to be at least size ' + cmap[key[i]][0].length)
+       }
+
+      /*
+       * map x axis point from 0->1 to 0 -> n
        */
        div = cmap[key[i]][0].map(function(x) { return x * n }).map( Math.round )
       /*
@@ -672,144 +676,8 @@ module.exports = function (spec) {
      return at.zip3(res[0], res[1], res[2])
    }
 
-
-   return result   
-  
-
-}
-
-});
-
-require.define("/node_modules/colorgrad/package.json",function(require,module,exports,__dirname,__filename,process,global){module.exports = {"main":"colorgrad.js"}
-});
-
-require.define("/node_modules/colorgrad/colorgrad.js",function(require,module,exports,__dirname,__filename,process,global){/*  colorgrad
- *
- * A simple way to build a hexadecimal or rgb color gradient
- *
- * Ben Postlethwaite 2012
- * benpostlethwaite.ca
- */
-
-module.exports = function () {
-
-  var that = {}
-
   /*
-   * COLORGRAD
-   * -------------------------------------------------
-   * function for creating gradients of colors based
-   * on starting and or terminating hex or rgb values.
-   *
-   */
-  function colorgrad() {
-    var args = Array.prototype.slice.call(arguments)
-      , arraymath = require('./arraymath')
-      , spec
-      , cstep
-      , c1 = args[0]
-      , c2 = null
-      , rgb1
-      , rgb2
-      , outType = isArray(c1) ? 'rgb': 'hex'
-      , add = arraymath("+")
-      , sub = arraymath("-")
-      , div = arraymath("/")
-      , mul = arraymath("*")
-
-    /*
-     *
-     * Unpack specification object
-     *
-     */
-    if(isObj(args[1])) {
-      spec = args[1]
-    }
-    else if (isObj(args[2])) {
-      spec = args[2]
-      c2 = args[1]
-    }
-    else
-      spec = {}
-    /*
-     * Or with defaults
-     */
-    var lum = spec.lum || 1
-      , n = spec.nshades || 100
-      , type = spec.type || "linear"
-
-    /*
-     *
-     * Design the color step array which will be
-     * a length 3 vector.
-     *
-     */
-    rgb1 = isArray(c1) ? c1 : hex2rgb(c1)
-    if(c2) // If two hexcolors supplied
-      rgb2 = isArray(c2) ? c2 : hex2rgb(c2)
-    else // 2nd color is lum% incr/decr of color1
-      rgb2 = add( mul(rgb1,[lum]), rgb1)
-
-    // Create step size to step through color gradient
-    cstep = div( sub(rgb2, rgb1), [n-1])
-
-    var i
-      , nc = []
-    nc[0] = rgb1
-    for (i = 1; i < n; ++i) {
-      nc[i] = add(nc[i-1], cstep)
-    }
-
-    function clims(c) {
-      if(c > 255)
-        return 255
-      else if(c < 0)
-        return 0
-      else return c
-    }
-
-    var result = []
-    nc.forEach(function (ar) {
-      ar = ar.map(Math.round).map(clims)
-      if(outType === 'hex')
-        ar = rgb2hex(ar)
-      result.push( ar )
-    })
-    return result
-  }
-
-
-  /*
-   *  HELPER FUNCS
-   * --------------------------------------------------------
-   */
-  /*
-   * HEXTORGB
-   * public
-   * Takes a hex string and outputs an rgb vector as a
-   * length 3 int array [red, green, blue]
-   * where 0 <= rgb values <= 255
-   */
-  function hex2rgb(hex) {
-    //validate hex string
-    hex = String(hex).replace(/[^0-9a-f]/gi, '')
-    // If 3 digit hex color
-    if (hex.length < 6) {
-      hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
-    }
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? [
-      parseInt(result[1], 16)
-    , parseInt(result[2], 16)
-    , parseInt(result[3], 16)
-    ] : null;
-  }
-
-  /*
-   * RGBTOHEX
-   * public
-   * Takes a length 3 integer array of rgb values where
-   * 0 <= rgbvalue <= 255 and outputs a hexstring
+   * RGB2HEX
    */
   function rgb2hex(rgbarray) {
     var hex = '#'
@@ -820,99 +688,11 @@ module.exports = function () {
     return hex
   }
 
-  /*
-   * ISARRAY
-   * private
-   */
-  function isArray(v) {
-    return Object.prototype.toString.call(v) === "[object Array]";
-  }
 
-  /*
-   * ISOBJ
-   * private
-   */
-  function isObj(v) {
-    return (v != null) && (typeof v === 'object') && !isArray(v)
-  }
-
-
-  that.colorgrad = colorgrad
-  that.hex2rgb = hex2rgb
-  that.rgb2hex = rgb2hex
-
-  return that
-
-}
-
-});
-
-require.define("/node_modules/colorgrad/arraymath.js",function(require,module,exports,__dirname,__filename,process,global){/*  arraymath
- *
- * simple array mathematic functions
- *
- * Ben Postlethwaite 2012
- * benpostlethwaite.ca
- */
-
-module.exports = function (o) {
-
-  var opfunc = op(o)
-
-  /*
-   * ARRAYMATH
-   */
-  return function(a, b) {
-    if(!isArray(a) || !isArray(b))
-      throw new Error("arraymath inputs must be arrays.")
-    var i, out = []
-    if(a.length === 1) {
-      for(i = 0; i < b.length; i++)
-        out[i] = opfunc(a, b[i])
-      return out
-    }
-    else if(b.length === 1) {
-      for(i = 0; i < a.length; i++)
-        out[i] = opfunc(a[i], b)
-      return out
-    }
-    else if (a.length === b.length) {
-      for(i = 0; i < a.length; i++)
-        out[i] = opfunc(a[i], b[i])
-      return out
-    }
-    else
-      throw new Error("Array lengths must be equal")
-  }
-
-  /*
-   * OP
-   */
-  function op(o) {
-    return function (a, b) {
-      var op = {
-        "*": a * b
-      , "+": a + b
-      ,"-": a - b
-      ,"/": a / b
-      }
-      return op[o]
-    }
-  }
-
-  /*
-   * ISARRAY
-   */
-  function isArray(v) {
-    return Object.prototype.toString.call(v) === "[object Array]";
-  }
+   return result
 
 
 }
-
-
-
-
 
 });
 
@@ -920,16 +700,13 @@ require.define("/node_modules/arraytools/package.json",function(require,module,e
 });
 
 require.define("/node_modules/arraytools/index.js",function(require,module,exports,__dirname,__filename,process,global){"use strict";
-module.exports = function () {
+
+var arraytools  = function () {
 
   var that = {}
 
-  function isArray (v) {
-    return Object.prototype.toString.call(v) === "[object Array]"
-  }
-   
   function isObj (v) {
-    return (v != null) && (typeof v === 'object') && !isArray(v)
+    return (v != null) && (typeof v === 'object') && !Array.isArray(v)
   }
 
   function linspace (start, end, num) {
@@ -948,7 +725,7 @@ module.exports = function () {
   }
 
   function zip3 (a, b, c) {
-      var len = Math.min.apply(null, [a.length, b.length, c.length]) 
+      var len = Math.min.apply(null, [a.length, b.length, c.length])
       var result = []
       for (var n = 0; n < len; n++) {
           result.push([a[n], b[n], c[n]])
@@ -956,15 +733,34 @@ module.exports = function () {
       return result
   }
 
-that.isArray = isArray
-that.isObj = isObj
-that.linspace = linspace
-that.graph = graph
-that.zip3 = zip3
+  function sum (A) {
+    var acc = 0
+    accumulate(A, acc)
+    function accumulate(x) {
+      for (var i = 0; i < x.length; i++) {
+        if (Array.isArray(x[i]))
+          accumulate(x[i], acc)
+        else
+          acc += x[i]
+      }
+    }
+    return acc
+  }
 
-return that
+
+
+  that.isObj = isObj
+  that.linspace = linspace
+  that.graph = graph
+  that.zip3 = zip3
+  that.sum = sum
+
+  return that
 
 }
+
+
+module.exports = arraytools()
 });
 
 require.define("/example/example.js",function(require,module,exports,__dirname,__filename,process,global){var cmap = require('./..')

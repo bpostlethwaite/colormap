@@ -3,8 +3,6 @@
  * January 2013
  * License MIT
  */
-"use strict";
-var cg = require('colorgrad')()
 var at = require('arraytools')
 
 module.exports = function (spec) {
@@ -197,7 +195,7 @@ module.exports = function (spec) {
    var result = []
    if (spec.format === "hex") {
     carray.forEach( function (ar) {
-      result.push( cg.rgb2hex(ar) )
+      result.push( rgb2hex(ar) )
     })
   } else result = carray
 
@@ -240,6 +238,18 @@ module.exports = function (spec) {
      */
      return at.zip3(res[0], res[1], res[2])
    }
+
+  /*
+   * RGB2HEX
+   */
+  function rgb2hex(rgbarray) {
+    var hex = '#'
+    rgbarray.forEach( function (dig) {
+      dig = dig.toString(16)
+      hex += ("00" + dig).substr( dig.length )
+    })
+    return hex
+  }
 
 
    return result
