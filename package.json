@@ -1,8 +1,7 @@
 {
   "name": "colormap",
-  "version": "0.2.3",
+  "version": "0.2.6",
   "description": "get sweet rgb or hex colormaps",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +23,9 @@
   "dependencies": {
     "arraytools": ">=0.0.1",
     "colorgrad": ">=0.1.0"
+  },
+  "devDependencies": {
+    "tap": ">0.2",
+    "tape": ">0.2"
   }
 }
