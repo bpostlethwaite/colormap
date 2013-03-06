@@ -1,7 +1,16 @@
 {
   "name": "colormap",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "get sweet rgb or hex colormaps",
+  "author": "bpostlethwaite",
+  "dependencies": {
+    "arraytools": ">=0.1.2"
+  },
+  "devDependencies": {
+    "tap": ">0.2",
+    "tape": ">0.2"
+  },
+  "main": "index.js",
   "scripts": {
     "test": "tap test/*.js"
   },
@@ -20,14 +29,5 @@
     "plot",
     "graph"
   ],
-  "author": "bpostlethwaite",
-  "license": "MIT",
-  "readmeFilename": "README.md",
-  "dependencies": {
-    "arraytools": ">=0.1.2"
-  },
-  "devDependencies": {
-    "tap": ">0.2",
-    "tape": ">0.2"
-  }
+  "license": "MIT"
 }
