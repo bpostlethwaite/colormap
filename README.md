@@ -1,11 +1,11 @@
 # colormap
 
-Output colormaps in hex or rgb. Note: these are based on [Matlab's colormaps](http://www.mathworks.com/help/matlab/ref/colormap.html)
+Output predefined color maps in hex or rgb. Note: these are based on [Matlab's colormaps](http://www.mathworks.com/help/matlab/ref/colormap.html)
 
 [![browser support](http://ci.testling.com/bpostlethwaite/colormap.png)](http://ci.testling.com/bpostlethwaite/colormap)
 [![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
 
-![all colormap output](http://img89.imageshack.us/img89/9401/newcolourthing.png)
+![all colormap output](http://img195.imageshack.us/img195/5052/colormap.png)
 
 Super simple just do,
 ```javascript
