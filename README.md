@@ -2,7 +2,8 @@
 
 Output colormaps in hex or rgb. Note: these are based on [Matlab's colormaps](http://www.mathworks.com/help/matlab/ref/colormap.html)
 
-[![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png?branch=master)](https://travis-ci.org/bpostlethwaite/colormap)
+[![browser support](http://ci.testling.com/bpostlethwaite/colormap.png)](http://ci.testling.com/bpostlethwaite/colormap)
+[![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
 
 ![all colormap output](http://img89.imageshack.us/img89/9401/newcolourthing.png)
 
