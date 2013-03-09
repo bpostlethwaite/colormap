@@ -1,6 +1,6 @@
 {
   "name": "colormap",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "get sweet rgb or hex colormaps",
   "author": "bpostlethwaite",
   "dependencies": {
