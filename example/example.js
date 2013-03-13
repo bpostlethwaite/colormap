@@ -28,3 +28,10 @@ for (i = 0; i < cms.length; i++) {
   c.font = "16px Helvetica";
   c.fillText( cms[i], n*10 + 10, i * 40 + 26);
 }
+
+
+
+
+var dataURL = canvas.toDataURL()
+canvas.parentElement.removeChild(canvas)
+document.getElementById('canvasImg').src = dataURL;

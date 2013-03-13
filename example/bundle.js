@@ -331,47 +331,6 @@ exports.extname = function(path) {
   return splitPathRe.exec(path)[3] || '';
 };
 
-exports.relative = function(from, to) {
-  from = exports.resolve(from).substr(1);
-  to = exports.resolve(to).substr(1);
-
-  function trim(arr) {
-    var start = 0;
-    for (; start < arr.length; start++) {
-      if (arr[start] !== '') break;
-    }
-
-    var end = arr.length - 1;
-    for (; end >= 0; end--) {
-      if (arr[end] !== '') break;
-    }
-
-    if (start > end) return [];
-    return arr.slice(start, end - start + 1);
-  }
-
-  var fromParts = trim(from.split('/'));
-  var toParts = trim(to.split('/'));
-
-  var length = Math.min(fromParts.length, toParts.length);
-  var samePartsLength = length;
-  for (var i = 0; i < length; i++) {
-    if (fromParts[i] !== toParts[i]) {
-      samePartsLength = i;
-      break;
-    }
-  }
-
-  var outputParts = [];
-  for (var i = samePartsLength; i < fromParts.length; i++) {
-    outputParts.push('..');
-  }
-
-  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-
-  return outputParts.join('/');
-};
-
 });
 
 require.define("__browserify_process",function(require,module,exports,__dirname,__filename,process,global){var process = module.exports = {};
@@ -384,7 +343,7 @@ process.nextTick = (function () {
     ;
 
     if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
+        return window.setImmediate;
     }
 
     if (canPost) {
@@ -432,7 +391,7 @@ process.binding = function (name) {
 
 });
 
-require.define("/package.json",function(require,module,exports,__dirname,__filename,process,global){module.exports = {}
+require.define("/package.json",function(require,module,exports,__dirname,__filename,process,global){module.exports = {"main":"index.js"}
 });
 
 require.define("/index.js",function(require,module,exports,__dirname,__filename,process,global){/*
@@ -628,9 +587,9 @@ module.exports = function (spec) {
   /*
    * apply map and convert result if needed
    */
-   var carray = buildmap(cmaps[spec.colormap], spec.nshades)
-   var result = []
-   if (spec.format === "hex") {
+  var carray = buildmap(cmaps[spec.colormap], spec.nshades)
+  var result = []
+  if (spec.format === "hex") {
     carray.forEach( function (ar) {
       result.push( rgb2hex(ar) )
     })
@@ -642,39 +601,41 @@ module.exports = function (spec) {
    * colormap function
    *
    */
-   function buildmap(cmap, n) {
+  function buildmap(cmap, n) {
 
     var div, val, res = []
     var key = ['r', 'g', 'b']
+
     for (var i = 0; i < 3; i++) {
       /*
        * Check inputs
        */
-       if (cmap[key[i]][0].length > spec.nshades) {
-          throw new Error(spec.colormap +
-            ' map requires nshades to be at least size ' + cmap[key[i]][0].length)
-       }
+      if (cmap[key[i]][0].length > n) {
+        throw new Error(spec.colormap +
+                        ' map requires nshades to be at least size ' + cmap[key[i]][0].length)
+      }
 
       /*
-       * map x axis point from 0->1 to 0 -> n
+       * map x axis point from 0->1 to 0 -> n-1
        */
-       div = cmap[key[i]][0].map(function(x) { return x * n }).map( Math.round )
+      div = cmap[key[i]][0].map(function(x) { return x * n }).map( Math.round )
       /*
        * map 0 -> 1 rgb value to 0 -> 255
        */
-       val = cmap[key[i]][1].map(function(x) { return x * 255 })
+      val = cmap[key[i]][1].map(function(x) { return x * 255 })
 
       /*
        * Build linear values from x axis point to x axis point
        * and from rgb value to value
        */
-       res[i] = at.graph( div, val ).map( Math.round )
-     }
+      res[i] = lines( div, val ).map( Math.round )
+    }
     /*
      * Then zip up 3xn vectors into nx3 vectors
      */
-     return at.zip3(res[0], res[1], res[2])
-   }
+
+    return at.zip3(res[0], res[1], res[2])
+  }
 
   /*
    * RGB2HEX
@@ -688,6 +649,16 @@ module.exports = function (spec) {
     return hex
   }
 
+  function lines (x , y) {
+    /*
+     * Inputs are vector x and y, where x defines the ranges
+     * to
+     */
+    var a = []
+    for (var i = 0; i < x.length - 1; i++)
+      a = a.concat( at.linspace(y[i], y[i+1], x[i+1] - x[i] ) )
+    return a
+  }
 
    return result
 
@@ -710,17 +681,10 @@ var arraytools  = function () {
   }
 
   function linspace (start, end, num) {
-    var inc = (end - start) / num
+    var inc = (end - start) / (num - 1)
     var a = []
-    for( var ii = 0; ii <= num; ii++)
+    for( var ii = 0; ii < num; ii++)
       a.push(start + ii*inc)
-    return a
-  }
-
-   function graph (x , y) {
-    var a = []
-    for (var i = 0; i < x.length - 1; i++)
-      a = a.concat( linspace(y[i], y[i+1], x[i+1] - x[i] ) )
     return a
   }
 
@@ -751,7 +715,6 @@ var arraytools  = function () {
 
   that.isObj = isObj
   that.linspace = linspace
-  that.graph = graph
   that.zip3 = zip3
   that.sum = sum
 
@@ -793,6 +756,13 @@ for (i = 0; i < cms.length; i++) {
   c.font = "16px Helvetica";
   c.fillText( cms[i], n*10 + 10, i * 40 + 26);
 }
+
+
+
+
+var dataURL = canvas.toDataURL()
+canvas.parentElement.removeChild(canvas)
+document.getElementById('canvasImg').src = dataURL;
 
 });
 require("/example/example.js");

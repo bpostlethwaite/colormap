@@ -4,7 +4,7 @@ var cmap = require('./..')
 
 test('is object - object', function(t) {
   t.plan(1)
-  var n = 15
+  var n = 10
   , cg
   , check = true
 
@@ -13,7 +13,7 @@ test('is object - object', function(t) {
            'winter', 'gray', 'bone', 'copper']
 
   for (var i = 0; i < cms.length; i++) {
-    cg = cmap({'colormap': cms[6], 'nshades': n })
+    cg = cmap({'colormap': cms[i], 'nshades': n })
     check = check & (cg.length == n)
   }
 

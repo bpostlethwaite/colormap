@@ -1,7 +1,7 @@
 {
   "name": "colormap",
   "version": "0.3.5",
-  "description": "get sweet rgb or hex colormaps",
+  "description": "Easily output great looking predefined hex or rgb color maps",
   "author": "bpostlethwaite",
   "dependencies": {
     "arraytools": ">=0.1.2"
@@ -13,6 +13,17 @@
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js"
+  },
+  "testling": {
+    "files": "test/*.js",
+    "browsers" : [
+      "ie/9..latest",
+      "chrome/20..latest",
+      "firefox/13..latest",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6", "ipad/6"
+    ]
   },
   "repository": {
     "type": "git",
@@ -26,6 +37,7 @@
     "rgb",
     "color gradient",
     "color range",
+    "color scale",
     "plot",
     "graph"
   ],
