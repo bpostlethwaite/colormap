@@ -2,7 +2,7 @@
 ## hex or rgb
 [![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
 
-![all colormap output](http://img195.imageshack.us/img195/5052/colormap.png)
+![all colormap output](examples/colormap.png)
 
 ```javascript
 var colormap = require('colormap')
