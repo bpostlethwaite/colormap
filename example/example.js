@@ -14,7 +14,6 @@ var cms = [
     'summer',
     'autumn',
     'winter',
-    'gray',
     'bone',
     'copper',
     'greys',

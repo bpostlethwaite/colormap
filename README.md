@@ -28,7 +28,7 @@ var n = 48;
 // Display all the colormaps
 var cms = [
     'jet', 'hsv', 'hot', 'cool', 'spring', 'summer', 'autumn',
-    'winter', 'gray','bone', 'copper', 'greys', 'YIGnBu', 'greens',
+    'winter', 'bone', 'copper', 'greys', 'YIGnBu', 'greens',
     'YIOrRd', 'bluered', 'RdBu', 'picnic', 'rainbow', 'portland',
     'blackbody', 'earth', 'electric'
 ];

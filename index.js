@@ -14,7 +14,7 @@ module.exports = function (spec) {
    * Default Options
    */
     var indicies, fromrgb, torgb,
-        nsteps, cmap,
+        nsteps, cmap, colormap, format,
         nshades, colors,
         r = [],
         g = [],
@@ -23,18 +23,20 @@ module.exports = function (spec) {
 
     if ( !at.isPlainObject(spec) ) spec = {};
 
-    spec.colormap = spec.colormap || 'jet';
-    spec.nshades = nshades = spec.nshades || 72;
-    spec.format = spec.format || 'hex';
+    colormap = spec.colormap || 'jet';
+    nshades = spec.nshades || 72;
+    format = spec.format || 'hex';
 
-    if (!(spec.colormap in colorScale)) {
-        throw Error(spec.colormap + ' not a supported colorscale');
+    colormap = colormap.toLowerCase();
+
+    if (!(colormap in colorScale)) {
+        throw Error(colormap + ' not a supported colorscale');
     }
 
-    cmap = colorScale[spec.colormap];
+    cmap = colorScale[colormap];
 
     if (cmap.length > nshades) {
-        throw new Error(spec.colormap +
+        throw new Error(colormap +
                         ' map requires nshades to be at least size ' +
                         cmap.length);
     }
@@ -66,7 +68,7 @@ module.exports = function (spec) {
 
     colors = at.zip3(r, g, b);
 
-    if (spec.format === 'hex') colors = colors.map( rgb2hex );
+    if (format === 'hex') colors = colors.map( rgb2hex );
 
     return colors;
 };
