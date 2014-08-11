@@ -1,6 +1,6 @@
 {
   "name": "colormap",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Easily output great looking predefined hex or rgb color maps",
   "author": "bpostlethwaite",
   "dependencies": {
