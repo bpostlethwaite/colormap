@@ -4,10 +4,6 @@
 
 ![all colormap output](http://img195.imageshack.us/img195/5052/colormap.png)
 
-[![browser support](http://ci.testling.com/bpostlethwaite/colormap.png)](http://ci.testling.com/bpostlethwaite/colormap)
-
-
-
 ```javascript
 var colormap = require('colormap')
 options = {
