@@ -1,10 +1,10 @@
 {
   "name": "colormap",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "Easily output great looking predefined hex or rgb color maps",
   "author": "bpostlethwaite",
   "dependencies": {
-    "arraytools": ">=0.1.2"
+    "arraytools": "^1.0.0"
   },
   "devDependencies": {
     "tap": ">0.2",
@@ -16,13 +16,14 @@
   },
   "testling": {
     "files": "test/*.js",
-    "browsers" : [
+    "browsers": [
       "ie/9..latest",
       "chrome/20..latest",
       "firefox/13..latest",
       "safari/latest",
       "opera/11.0..latest",
-      "iphone/6", "ipad/6"
+      "iphone/6",
+      "ipad/6"
     ]
   },
   "repository": {
