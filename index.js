@@ -5,7 +5,8 @@
  */
 'use strict';
 var at = require('arraytools');
-var colorScale = require('./colorScales.json');
+var tinycolor = require('tinycolor2');
+var colorScale = require('./colorScales2.json');
 
 
 module.exports = function (spec) {
@@ -15,7 +16,7 @@ module.exports = function (spec) {
    */
     var indicies, fromrgb, torgb,
         nsteps, cmap, colormap, format,
-        nshades, colors,
+        nshades, colors, badscale, highestVal,
         r = [],
         g = [],
         b = [];
@@ -23,17 +24,31 @@ module.exports = function (spec) {
 
     if ( !at.isPlainObject(spec) ) spec = {};
 
-    colormap = spec.colormap || 'jet';
+    if (typeof spec.colormap === 'string') {
+        if (!(colormap in colorScale)) {
+            throw Error(colormap + ' not a supported colorscale');
+        }
+        colormap = spec.colormap || 'jet';
+        cmap = colorScale[colormap];
+
+    } else if (Array.isArray(colormap)) {
+        badscale = colormap.some(function(si){
+            if(si.length!==2) return true;
+            if(si[0]<highestVal) return true;
+            highestVal = si[0];
+            return !tinycolor(si[1]).ok;
+        });
+
+
+    }
+
+
+
     nshades = spec.nshades || 72;
     format = spec.format || 'hex';
 
     colormap = colormap.toLowerCase();
 
-    if (!(colormap in colorScale)) {
-        throw Error(colormap + ' not a supported colorscale');
-    }
-
-    cmap = colorScale[colormap];
 
     if (cmap.length > nshades) {
         throw new Error(colormap +
@@ -44,19 +59,22 @@ module.exports = function (spec) {
     /*
      * map index points from 0->1 to 0 -> n-1
      */
+    var INDEX = 0;
+    var RGB = 1;
+
     indicies = cmap.map(function(c) {
-        return Math.round(c.index * nshades);
+        return Math.round(c[INDEX] * nshades);
     });
 
 
     /*
-     * map increasing linear values between indicies to
-     * linear steps in colorvalues
+     * interpolate by mapping increasing linear values
+     * between indicies to linear steps in colorvalues
      */
     for (var i = 0; i < indicies.length-1; ++i) {
         nsteps = indicies[i+1] - indicies[i];
-        fromrgb = cmap[i].rgb;
-        torgb = cmap[i+1].rgb;
+        fromrgb = cmap[i][RGB];
+        torgb = cmap[i+1][RGB];
         r = r.concat(at.linspace(fromrgb[0], torgb[0], nsteps ) );
         g = g.concat(at.linspace(fromrgb[1], torgb[1], nsteps ) );
         b = b.concat(at.linspace(fromrgb[2], torgb[2], nsteps ) );

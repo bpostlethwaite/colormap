@@ -4,7 +4,8 @@
   "description": "Easily output great looking predefined hex or rgb color maps",
   "author": "bpostlethwaite",
   "dependencies": {
-    "arraytools": "^1.0.0"
+    "arraytools": "^1.0.0",
+    "tinycolor2": "^1.0.0"
   },
   "devDependencies": {
     "tap": ">0.2",
