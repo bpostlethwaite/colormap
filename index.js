@@ -68,7 +68,7 @@ module.exports = function (spec) {
         index = cmap[i].index;
         rgba = cmap[i].rgb;
         // if user supplies their own map use theirs
-        if (rgba.length === 4 && rgba[4] >= 0 && rgba <= 1) continue;
+        if (rgba.length === 4 && rgba[3] >= 0 && rgba[3] <= 1) continue;
         rgba[3] = alpha[0] + (alpha[1] - alpha[0])*index;
     }
 
