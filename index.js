@@ -5,7 +5,7 @@
  */
 'use strict';
 var at = require('arraytools');
-var colorScale = require('./colorScales.json');
+var colorScale = require('./colorScales');
 
 
 module.exports = function (spec) {
