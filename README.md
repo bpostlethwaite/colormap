@@ -19,7 +19,7 @@ where leaving `options = {}` or `undefined` results in the defaults given above.
 ## Options
 The colormap can be any of the supported builtin colormaps. Or you can add your own. For an example of how to add your own see the json format available at:
 ```javascript
-colorscales = require('colormap/colorScales.json')
+colorscales = require('colormap/colorScales')
 ```
 Colorscales are a sequence of objects containing an `index` and `rgb` key. The index defines how fast or slow the `rgb` values will change from one segment to the next. Ie.the steepness of the gradient between two segments. The `rgb` parameter can hold a length 3 or 4 array, depending if alpha values are included in the mapping.
 
