@@ -4,29 +4,34 @@
 
 ![all colormap output](https://github.com/bpostlethwaite/colormap/blob/master/example/colormaps.png)
 
+## Simple example
+
 ```javascript
 var colormap = require('colormap')
 options = {
-  colormap: "jet"   // pick a builtin colormap or add your own
-, nshades: 72       // how many divisions
-, format: "hex"     // "hex" or "rgb" or "rgbaString"
-, alpha: 1          // set an alpha value or a linear alpha mapping [start, end]
+  colormap: 'jet',   // pick a builtin colormap or add your own
+  nshades: 72,       // how many divisions
+  format: 'hex',     // "hex" or "rgb" or "rgbaString"
+  alpha: 1           // set an alpha value or a linear alpha mapping [start, end]
 }
 cg = colormap(options)
 ```
+
 where leaving `options = {}` or `undefined` results in the defaults given above. There is a minimum number of `nshades` divisions you can select since the algorithms for each colormap have different requirements. `colormap` throws an error if there are too few divisions for the chosen colormap and gives the minimum number required. You should be safe with `n > 10` for all the colormaps, though some require much less (much simpler to implemenent).
 
 ## Options
 The colormap can be any of the supported builtin colormaps. Or you can add your own. For an example of how to add your own see the json format available at:
+
 ```javascript
 colorscales = require('colormap/colorScales')
 ```
+
 Colorscales are a sequence of objects containing an `index` and `rgb` key. The index defines how fast or slow the `rgb` values will change from one segment to the next. Ie.the steepness of the gradient between two segments. The `rgb` parameter can hold a length 3 or 4 array, depending if alpha values are included in the mapping.
 
 ## Return values
 An array of hex values ('hex') or an array of length 4 arrays containing rgba values ('rgb') or an rgba css string ('rgbaString').
 
-## Example
+## Complete Example (produces colormap image used at top of this README)
 
 Here is a complete example which uses all built in color maps and utilizes some alpha channel mapping.
 
