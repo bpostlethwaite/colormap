@@ -32,9 +32,7 @@ Colorscales are a sequence of objects containing an `index` and `rgb` key. The i
 An array of hex values ('hex') or an array of length 4 arrays containing rgba values ('rgb') or an rgba css string ('rgbaString').
 
 ## Complete Example 
-> produces colormap image used at top of this README
-
-Here is a complete example which uses all built in color maps and utilizes some alpha channel mapping.
+This example will produce the colormap image used at top of this README. It uses all built in color maps and utilizes alpha channel mapping.
 
 ```javascript
 var cmap = require('colormap'),
