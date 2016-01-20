@@ -26,8 +26,8 @@ test('user colormap alpha values override alpha config', function (t) {
     var alpha = 0.5;
 
     var map = [
-        {"index":0,"rgb":[0,0,0, alpha]},
-        {"index":1,"rgb":[255,255,255, alpha]}
+        {index:0, rgb:[0, 0, 0, alpha]},
+        {index:1, rgb:[255, 255, 255, alpha]}
     ];
 
     var rgba = colormap({

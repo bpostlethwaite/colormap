@@ -1,6 +1,6 @@
 {
   "name": "colormap",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Easily output great looking predefined hex or rgb color maps",
   "author": "bpostlethwaite",
   "dependencies": {
@@ -38,6 +38,7 @@
     "rgb",
     "color gradient",
     "color range",
+    "colorscale",
     "color scale",
     "plot",
     "graph"

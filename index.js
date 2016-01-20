@@ -4,9 +4,9 @@
  * License MIT
  */
 'use strict';
+
 var at = require('arraytools');
 var colorScale = require('./colorScales');
-
 
 module.exports = function (spec) {
 
@@ -22,17 +22,24 @@ module.exports = function (spec) {
         a = [];
 
     if ( !at.isPlainObject(spec) ) spec = {};
+
     if (!spec.colormap) colormap = 'jet';
+
     if (!Array.isArray(spec.alpha)) {
         if (typeof spec.alpha === 'number') spec.alpha = [spec.alpha, spec.alpha];
         else spec.alpha = [1, 1];
-    } else if (spec.alpha.length !== 2) spec.alpha = [1, 1];
+    }
+    else if (spec.alpha.length !== 2) {
+        spec.alpha = [1, 1];
+    }
+
     if (typeof spec.colormap === 'string') {
         colormap = spec.colormap.toLowerCase();
 
         if (!(colormap in colorScale)) {
             throw Error(colormap + ' not a supported colorscale');
         }
+
         cmap = colorScale[colormap];
 
     } else if (Array.isArray(spec.colormap)) {
@@ -44,9 +51,9 @@ module.exports = function (spec) {
     alpha = spec.alpha;
 
     if (cmap.length > nshades) {
-        throw new Error(colormap +
-                        ' map requires nshades to be at least size ' +
-                        cmap.length);
+        throw new Error(
+            colormap+' map requires nshades to be at least size '+cmap.length
+        );
     }
 
     /*
@@ -67,7 +74,8 @@ module.exports = function (spec) {
     for (i = 0; i < indicies.length; ++i) {
         index = cmap[i].index;
         rgba = cmap[i].rgb;
-        // if user supplies their own map use theirs
+
+        // if user supplies their own map use it
         if (rgba.length === 4 && rgba[3] >= 0 && rgba[3] <= 1) continue;
         rgba[3] = alpha[0] + (alpha[1] - alpha[0])*index;
     }
