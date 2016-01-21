@@ -35,7 +35,7 @@ An array of hex values ('hex') or an array of length 4 arrays containing rgba va
 This example will produce the colormap image used at top of this README. It uses all built in color maps and utilizes alpha channel mapping.
 
 ```javascript
-var cmap = require('colormap'),
+var cmap = require('./..'),
     canvas = document.getElementById('canvas'),
     img = document.getElementById('background'),
     c = canvas.getContext('2d'),
@@ -83,6 +83,9 @@ function run() {
     var ilast = i;
     c.drawImage(img, 0, i*40, 480, 240);
 
+    // remove background img
+    img.parentElement.removeChild(img);
+
     for (var i = 0; i < colormaps.length; i++) {
         height = (ilast + i)*40;
         colormap = cmap({
@@ -93,11 +96,6 @@ function run() {
         });
         drawColorMaps(colormap, colormaps[i] + ' with transparency', height);
     }
-
-    var dataURL = canvas.toDataURL();
-    canvas.parentElement.removeChild(canvas);
-    img.parentElement.removeChild(img);
-    document.getElementById('canvasImg').src = dataURL;
 }
 ```
 
