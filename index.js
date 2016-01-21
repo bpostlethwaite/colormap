@@ -6,13 +6,14 @@
 'use strict';
 
 var at = require('arraytools');
+var clone = require('clone');
 var colorScale = require('./colorScales');
 
 module.exports = function (spec) {
 
-  /*
-   * Default Options
-   */
+    /*
+     * Default Options
+     */
     var indicies, rgba, fromrgba, torgba,
         nsteps, cmap, colormap, format,
         nshades, colors, alpha, index, i,
@@ -23,37 +24,48 @@ module.exports = function (spec) {
 
     if ( !at.isPlainObject(spec) ) spec = {};
 
-    if (!spec.colormap) colormap = 'jet';
+    nshades = spec.nshades || 72;
+    format = spec.format || 'hex';
 
-    if (!Array.isArray(spec.alpha)) {
-        if (typeof spec.alpha === 'number') spec.alpha = [spec.alpha, spec.alpha];
-        else spec.alpha = [1, 1];
-    }
-    else if (spec.alpha.length !== 2) {
-        spec.alpha = [1, 1];
-    }
+    colormap = spec.colormap;
+    if (!colormap) colormap = 'jet';
 
-    if (typeof spec.colormap === 'string') {
-        colormap = spec.colormap.toLowerCase();
+    if (typeof colormap === 'string') {
+        colormap = colormap.toLowerCase();
 
-        if (!(colormap in colorScale)) {
+        if (!colorScale[colormap]) {
             throw Error(colormap + ' not a supported colorscale');
         }
 
-        cmap = colorScale[colormap];
+        cmap = clone(colorScale[colormap]);
 
-    } else if (Array.isArray(spec.colormap)) {
-        cmap = spec.colormap;
+    } else if (Array.isArray(colormap)) {
+        cmap = clone(colormap);
+
+    } else {
+        throw Error('unsupported colormap option', colormap);
     }
-
-    nshades = spec.nshades || 72;
-    format = spec.format || 'hex';
-    alpha = spec.alpha;
 
     if (cmap.length > nshades) {
         throw new Error(
             colormap+' map requires nshades to be at least size '+cmap.length
         );
+    }
+
+    if (!Array.isArray(spec.alpha)) {
+
+        if (typeof spec.alpha === 'number') {
+            alpha = [spec.alpha, spec.alpha];
+
+        } else {
+            alpha = [1, 1];
+        }
+
+    } else if (spec.alpha.length !== 2) {
+        alpha = [1, 1];
+
+    } else {
+        alpha = clone(spec.alpha);
     }
 
     /*

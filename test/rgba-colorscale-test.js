@@ -1,5 +1,5 @@
 var colormap = require('../.'),
-    test = require('tape');
+    test = require('tap').test;
 
 test('alpha config creates rgba arrays with correct alpha', function (t) {
 
@@ -41,6 +41,25 @@ test('user colormap alpha values override alpha config', function (t) {
 
     t.equal(firstRgba[3], alpha);
     t.equal(lastRgba[3], alpha);
+
+    t.end();
+});
+
+test('alphamap values are computed independently between runs', function(t) {
+    var blueRed = colormap({
+        colormap: "bluered",
+        format: "rgba",
+        alpha: [0, 1]
+    });
+
+    var blueRed2 = colormap({
+        colormap: "bluered",
+        format: "rgba",
+        alpha: [0, 0.5]
+    });
+
+    t.same(blueRed[blueRed.length - 1], [ 255, 0, 0, 1 ]);
+    t.same(blueRed2[blueRed2.length - 1], [ 255, 0, 0, 0.5 ]);
 
     t.end();
 });

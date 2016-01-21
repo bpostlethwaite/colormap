@@ -1,8 +1,8 @@
 var cmap = require('./..'),
-    test = require('tape');
+    tap = require('tap');
 
 
-test('is object - object', function(t) {
+tap.test('is object - object', function(t) {
   t.plan(1);
   var n = 15,
       cg,
