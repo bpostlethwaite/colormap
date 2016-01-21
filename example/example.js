@@ -46,6 +46,9 @@ function run() {
     var ilast = i;
     c.drawImage(img, 0, i*40, 480, 240);
 
+    // remove background img
+    img.parentElement.removeChild(img);
+
     for (var i = 0; i < colormaps.length; i++) {
         height = (ilast + i)*40;
         colormap = cmap({
@@ -56,10 +59,4 @@ function run() {
         });
         drawColorMaps(colormap, colormaps[i] + ' with transparency', height);
     }
-
-
-    var dataURL = canvas.toDataURL();
-    canvas.parentElement.removeChild(canvas);
-    img.parentElement.removeChild(img);
-    document.getElementById('canvasImg').src = dataURL;
 }
