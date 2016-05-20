@@ -9,8 +9,11 @@ var at = require('arraytools');
 var clone = require('clone');
 var colorScale = require('./colorScales');
 
-module.exports = function (spec) {
+module.exports = createColormap;
 
+createColormap.colorScales = colorScale;
+
+function createColormap (spec) {
     /*
      * Default Options
      */
