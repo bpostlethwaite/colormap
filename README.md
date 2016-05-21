@@ -9,7 +9,7 @@
 ```javascript
 var colormap = require('colormap')
 options = {
-  colormap: 'jet',   // pick a builtin colormap or add your own
+  colormap: 'jet',   // pick a builtin colormap or pass your own
   nshades: 72,       // how many divisions
   format: 'hex',     // "hex" or "rgb" or "rgbaString"
   alpha: 1           // set an alpha value or a linear alpha mapping [start, end]
@@ -20,7 +20,7 @@ cg = colormap(options)
 where leaving `options = {}` or `undefined` results in the defaults given above. There is a minimum number of `nshades` divisions you can select since the algorithms for each colormap have different requirements. `colormap` throws an error if there are too few divisions for the chosen colormap and gives the minimum number required. You should be safe with `n > 10` for all the colormaps, though some require much less (much simpler to implemenent).
 
 ## Options
-The colormap can be any of the supported builtin colormaps. Or you can add your own. For an example of how to add your own see the json format available at:
+The `colormap` option can be any of the supported builtin colormaps. Or you can add your own. For an example of how to add your own see the json format available at:
 
 ```javascript
 colorscales = require('colormap/colorScales')
