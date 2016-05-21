@@ -8,9 +8,13 @@
     "clone": "^1.0.2"
   },
   "devDependencies": {
+    "color-space": "^1.14.3",
     "tap": "^5.1"
   },
-  "files": ["index.js", "colorScales.js"],
+  "files": [
+    "index.js",
+    "colorScales.js"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js",
