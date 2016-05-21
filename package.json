@@ -10,7 +10,7 @@
   "devDependencies": {
     "tap": "^5.1"
   },
-  "files": [],
+  "files": ["index.js", "colorScales.js"],
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js",
