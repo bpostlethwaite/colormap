@@ -10,7 +10,9 @@ var cmap = require('./..'),
 
         'viridis', 'inferno', 'magma', 'plasma', 'warm', 'cool', 'rainbow-soft',
 
-        'bathymetry', 'cdom', 'chlorophyll', 'density', 'freesurface-blue', 'freesurface-red', 'oxygen', 'par', 'phase', 'salinity', 'temperature', 'turbidity', 'velocity-blue', 'velocity-green'
+        'bathymetry', 'cdom', 'chlorophyll', 'density', 'freesurface-blue', 'freesurface-red', 'oxygen', 'par', 'phase', 'salinity', 'temperature', 'turbidity', 'velocity-blue', 'velocity-green',
+
+        'cubehelix'
     ];
 
 img.onload = run;

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
 
-![all colormap output](https://github.com/bpostlethwaite/colormap/blob/master/example/colormaps.png)
+![all colormap output](./example/colormaps.png)
 
 ## Simple example
 

@@ -6,6 +6,8 @@
 var cubehelix = require('color-space/cubehelix');
 
 
+if (typeof document === 'undefined') return;
+
 //paint original and compressed colormap for comparison
 var magma = require('./res/magma');
 show(toImageData(magma), 'magma original');
