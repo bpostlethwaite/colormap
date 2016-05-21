@@ -1,5 +1,6 @@
 /**
- * Compare canonic/compressed colormap
+ * Compare canonic/compressed colormaps.
+ * Generate compressed colormap jsons.
  */
 
 var cubehelix = require('color-space/cubehelix');
@@ -25,12 +26,13 @@ show(toImageData(compress(plasma, 32)), 'plasma compressed');
 getColors('./test/res/warm.png')
 .then(function (data) {
 	show(toImageData(data), 'warm original');
-	show(toImageData(createCubehelix(256, {
+	show(toImageData(createCubehelix(16, {
 		rotation: .6,
 		start: 0,
 		hue: 3,
 		gamma: 1
 	})), 'warm cubehelix approx');
+
 	show(toImageData(compress(data, 111)), 'warm compressed');
 });
 
@@ -69,7 +71,6 @@ show(toImageData(compress(freesurfaceBlue, 32)), 'freesurfaceBlue compressed');
 var freesurfaceRed = require('./res/freesurface-red');
 show(toImageData(freesurfaceRed), 'freesurfaceRed original');
 show(toImageData(compress(freesurfaceRed, 32)), 'freesurfaceRed compressed');
-console.log(JSON.stringify(toColormap(compress(freesurfaceRed, 32))));
 
 var oxygen = require('./res/oxygen');
 show(toImageData(oxygen), 'oxygen original');
