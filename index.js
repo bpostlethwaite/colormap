@@ -11,8 +11,6 @@ var colorScale = require('./colorScales');
 
 module.exports = createColormap;
 
-createColormap.colorScales = colorScale;
-
 function createColormap (spec) {
     /*
      * Default Options
