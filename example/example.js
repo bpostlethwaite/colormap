@@ -6,7 +6,13 @@ var cmap = require('./..'),
     colormaps = [
         'jet', 'hsv','hot','cool','spring','summer','autumn','winter','bone',
         'copper','greys','YIGnBu','greens','YIOrRd','bluered','RdBu','picnic',
-        'rainbow','portland','blackbody','earth','electric'
+        'rainbow','portland','blackbody','earth','electric',
+
+        'viridis', 'inferno', 'magma', 'plasma', 'warm', 'cool', 'rainbow-soft',
+
+        'bathymetry', 'cdom', 'chlorophyll', 'density', 'freesurface-blue', 'freesurface-red', 'oxygen', 'par', 'phase', 'salinity', 'temperature', 'turbidity', 'velocity-blue', 'velocity-green',
+
+        'cubehelix'
     ];
 
 img.onload = run;

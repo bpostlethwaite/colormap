@@ -1,18 +1,25 @@
 {
   "name": "colormap",
   "version": "2.1.2",
-  "description": "Easily output great looking predefined hex or rgb color maps",
+  "description": "Great looking color maps",
   "author": "bpostlethwaite",
   "dependencies": {
     "arraytools": "^1.1.2",
     "clone": "^1.0.2"
   },
   "devDependencies": {
+    "color-space": "^1.14.3",
     "tap": "^5.1"
   },
+  "files": [
+    "index.js",
+    "colorScales.js"
+  ],
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/*.js",
+    "build": "browserify example/example.js -o example/bundle.js",
+    "draw": "budo test/draw.js"
   },
   "testling": {
     "files": "test/*.js",
@@ -36,6 +43,15 @@
     "color",
     "hex",
     "rgb",
+    "color-space",
+    "cubehelix",
+    "inferno",
+    "magma",
+    "plasma",
+    "viridis",
+    "matplotlib",
+    "oceanography",
+    "seismic",
     "color gradient",
     "color range",
     "colorscale",

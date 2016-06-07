@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
 
-![all colormap output](https://github.com/bpostlethwaite/colormap/blob/master/example/colormaps.png)
+![all colormap output](./example/colormaps.png)
 
 ## Simple example
 
@@ -31,7 +31,7 @@ Colorscales are a sequence of objects containing an `index` and `rgb` key. The i
 ## Return values
 An array of hex values ('hex') or an array of length 4 arrays containing rgba values ('rgb') or an rgba css string ('rgbaString').
 
-## Complete Example 
+## Complete Example
 This example will produce the colormap image used at top of this README. It uses all built in color maps and utilizes alpha channel mapping.
 
 ```javascript
@@ -100,3 +100,8 @@ function run() {
 ```
 
 Then just [browserify](https://github.com/substack/node-browserify) it and throw it in some html and it will output the image above!
+
+
+## Credits
+
+Color maps are inspired by [matplotlib](https://github.com/d3/d3-scale#sequential-color-scales) color scales, [cmocean](https://github.com/matplotlib/cmocean) oceanographic colormaps, [cosine gradients](https://github.com/thi-ng/color/blob/master/src/gradients.org) and others. Thanks to authors of these libs for their invaluable work.
