@@ -1,5 +1,5 @@
 var colormap = require('../.'),
-    test = require('tap').test;
+    test = require('tape').test;
 
 test('alpha config creates rgba arrays with correct alpha', function (t) {
 

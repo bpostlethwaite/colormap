@@ -1,5 +1,5 @@
 var cmap = require('./..'),
-    tap = require('tap');
+    tap = require('tape');
 
 
 tap.test('is object - object', function(t) {

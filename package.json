@@ -9,15 +9,11 @@
   },
   "devDependencies": {
     "color-space": "^1.14.3",
-    "tap": "^5.1"
+    "tape": "^4.7.0"
   },
-  "files": [
-    "index.js",
-    "colorScales.js"
-  ],
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js",
+    "test": "tape test/*.js",
     "build": "browserify example/example.js -o example/bundle.js",
     "draw": "budo test/draw.js"
   },
