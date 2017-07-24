@@ -1,21 +1,33 @@
-# Easy Javascript Colormaps
-
-[![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
+# colormap [![Build Status](https://travis-ci.org/bpostlethwaite/colormap.png)](https://travis-ci.org/bpostlethwaite/colormap)
 
 ![all colormap output](./example/colormaps.png)
 
-## Simple example
+## Usage
 
-```javascript
-var colormap = require('colormap')
-options = {
-  colormap: 'jet',   // pick a builtin colormap or pass your own
-  nshades: 72,       // how many divisions
-  format: 'hex',     // "hex" or "rgb" or "rgbaString"
-  alpha: 1           // set an alpha value or a linear alpha mapping [start, end]
-}
-cg = colormap(options)
+[![npm install colormap](https://nodei.co/npm/colormap.png?mini=true)](https://npmjs.org/package/colormap/)
+
+```js
+let colormap = require('colormap')
+
+let colors = colormap({
+    colormap: 'jet'
+    nshades: 72,
+    format: 'hex',
+    alpha: 1
+})
 ```
+
+## API
+
+### colormap(options)
+
+| Property | Default | Meaning |
+|---|---|---|
+| `colormap` | `'jet'` |  |
+| `nshades` | `72` | |
+| `format` | `'hex'` | |
+| `alpha` | `1` | |
+| `interpolate` | `'smoothstep'` | `smoothstep` or `linear` interpolation between steps. |
 
 where leaving `options = {}` or `undefined` results in the defaults given above. There is a minimum number of `nshades` divisions you can select since the algorithms for each colormap have different requirements. `colormap` throws an error if there are too few divisions for the chosen colormap and gives the minimum number required. You should be safe with `n > 10` for all the colormaps, though some require much less (much simpler to implemenent).
 

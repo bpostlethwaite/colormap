@@ -1,6 +1,25 @@
 var colormap = require('../.'),
     test = require('tape').test;
 
+
+test('is object - object', function(t) {
+  t.plan(1);
+  var n = 15,
+      cg,
+      check = true;
+
+    // Display all the colormaps
+    var cms = ['jet', 'hsv' ,'hot', 'cool', 'spring', 'summer', 'autumn',
+               'winter', 'greys', 'bone', 'copper'];
+
+    for (var i = 0; i < cms.length; i++) {
+        cg = cmap({'colormap': cms[i], 'nshades': n });
+        check = check & (cg.length == n);
+    }
+
+    t.ok(check);
+});
+
 test('alpha config creates rgba arrays with correct alpha', function (t) {
 
     var alpha = 0.5;
@@ -45,12 +64,12 @@ test('user colormap alpha values override alpha config', function (t) {
     t.end();
 });
 
-test('alphamap values are computed independently between runs', function(t) {
-    var blueRed = colormap({
-        colormap: "bluered",
-        format: "rgba",
-        alpha: [0, 1]
-    });
+test.only('alphamap values are computed independently between runs', function(t) {
+    // var blueRed = colormap({
+    //     colormap: "bluered",
+    //     format: "rgba",
+    //     alpha: [0, 1]
+    // });
 
     var blueRed2 = colormap({
         colormap: "bluered",
@@ -58,8 +77,12 @@ test('alphamap values are computed independently between runs', function(t) {
         alpha: [0, 0.5]
     });
 
-    t.same(blueRed[blueRed.length - 1], [ 255, 0, 0, 1 ]);
+    // t.same(blueRed[blueRed.length - 1], [ 255, 0, 0, 1 ]);
     t.same(blueRed2[blueRed2.length - 1], [ 255, 0, 0, 0.5 ]);
 
     t.end();
+});
+
+test('repeating values', function(t) {
+    t.end()
 });

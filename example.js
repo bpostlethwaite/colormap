@@ -1,6 +1,6 @@
-var cmap = require('./..'),
-    canvas = document.getElementById('canvas'),
-    img = document.getElementById('background'),
+var cmap = require('.'),
+    img = document.body.appendChild(document.createElement('img')),
+    canvas = document.body.appendChild(document.createElement('canvas')),
     c = canvas.getContext('2d'),
     n = 48,
     colormaps = [
@@ -15,12 +15,15 @@ var cmap = require('./..'),
         'cubehelix'
     ];
 
+img.width = 480;
 img.onload = run;
+img.src = './night.jpg'
 
 function drawColorMaps (colormap, name, height) {
     /*
      * Build up the color ranges and add text
      */
+
     for (var j = 0; j < n; j++) {
         c.fillStyle = colormap[j];      // start ind at index 0
         c.fillRect(j*10, height, 10, 40);
