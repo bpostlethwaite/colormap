@@ -23,11 +23,10 @@ let colors = colormap({
 
 | Property | Default | Meaning |
 |---|---|---|
-| `colormap` | `'jet'` |  |
-| `nshades` | `72` | |
-| `format` | `'hex'` | |
-| `alpha` | `1` | |
-| `interpolate` | `'smoothstep'` | `smoothstep` or `linear` interpolation between steps. |
+| `colormap` | `'jet'` | Color scale name |
+| `nshades` | `72` | Number of colors in returned array |
+| `format` | `'hex'` | `'hex'`, `'rgbaString'`, `'rgb'` |
+| `alpha` | `1` | Alpha range, can be an array with alpha values or just 2 values for start/end colors. |
 
 where leaving `options = {}` or `undefined` results in the defaults given above. There is a minimum number of `nshades` divisions you can select since the algorithms for each colormap have different requirements. `colormap` throws an error if there are too few divisions for the chosen colormap and gives the minimum number required. You should be safe with `n > 10` for all the colormaps, though some require much less (much simpler to implemenent).
 
