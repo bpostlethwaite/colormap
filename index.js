@@ -28,7 +28,7 @@ function createColormap (spec) {
 
     if ( !isPlainObject(spec) ) spec = {};
 
-    nshades = spec.nshades || 72;
+    nshades = (spec.nshades || 72) - 1;
     format = spec.format || 'hex';
 
     colormap = spec.colormap;
@@ -116,6 +116,10 @@ function createColormap (spec) {
             ])
         }
     }
+
+    //add 1 step as last value
+    colors.push(cmap[cmap.length - 1].rgb.concat(alpha[1]))
+
     if (format === 'hex') colors = colors.map( rgb2hex );
     if (format === 'rgbaString') colors = colors.map( rgbaStr );
 

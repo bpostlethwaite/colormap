@@ -23,11 +23,9 @@ function drawColorMaps (colormap, name, height) {
     /*
      * Build up the color ranges and add text
      */
-
     for (var j = 0; j < n; j++) {
         c.fillStyle = colormap[j];      // start ind at index 0
         c.fillRect(j*10, height, 10, 40);
-
     }
     c.fillStyle = '#262626';
     c.font = '16px Helvetica';
