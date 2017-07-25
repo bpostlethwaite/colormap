@@ -1,5 +1,5 @@
-var colormap = require('../.'),
-    test = require('tape').test;
+var colormap = require('.'),
+    test = require('tape');
 
 
 test('is object - object', function(t) {
@@ -13,7 +13,7 @@ test('is object - object', function(t) {
                'winter', 'greys', 'bone', 'copper'];
 
     for (var i = 0; i < cms.length; i++) {
-        cg = cmap({'colormap': cms[i], 'nshades': n });
+        cg = colormap({'colormap': cms[i], 'nshades': n });
         check = check & (cg.length == n);
     }
 
@@ -64,12 +64,12 @@ test('user colormap alpha values override alpha config', function (t) {
     t.end();
 });
 
-test.only('alphamap values are computed independently between runs', function(t) {
-    // var blueRed = colormap({
-    //     colormap: "bluered",
-    //     format: "rgba",
-    //     alpha: [0, 1]
-    // });
+test('alphamap values are computed independently between runs', function(t) {
+    var blueRed = colormap({
+        colormap: "bluered",
+        format: "rgba",
+        alpha: [0, 1]
+    });
 
     var blueRed2 = colormap({
         colormap: "bluered",
@@ -77,7 +77,7 @@ test.only('alphamap values are computed independently between runs', function(t)
         alpha: [0, 0.5]
     });
 
-    // t.same(blueRed[blueRed.length - 1], [ 255, 0, 0, 1 ]);
+    t.same(blueRed[blueRed.length - 1], [ 255, 0, 0, 1 ]);
     t.same(blueRed2[blueRed2.length - 1], [ 255, 0, 0, 0.5 ]);
 
     t.end();
