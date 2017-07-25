@@ -5,9 +5,7 @@
  */
 'use strict';
 
-var at = require('arraytools');
-var clone = require('clone');
-var colorScale = require('./colormap');
+var colorScale = require('./colorScale');
 var isPlainObject = require('is-plain-obj');
 var clamp = require('clamp');
 var lerp = require('lerp')
@@ -44,7 +42,7 @@ function createColormap (spec) {
         cmap = colorScale[colormap];
 
     } else if (Array.isArray(colormap)) {
-        cmap = clone(colormap);
+        cmap = colormap.slice();
 
     } else {
         throw Error('unsupported colormap option', colormap);
@@ -69,7 +67,7 @@ function createColormap (spec) {
         alpha = [1, 1];
 
     } else {
-        alpha = clone(spec.alpha);
+        alpha = spec.alpha.slice();
     }
 
     // map index points from 0..1 to 0..n-1
