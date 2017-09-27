@@ -4,8 +4,6 @@
   "description": "Great looking color maps",
   "author": "bpostlethwaite",
   "dependencies": {
-    "clamp": "^1.0.1",
-    "is-plain-obj": "^1.1.0",
     "lerp": "^1.0.3"
   },
   "devDependencies": {

@@ -82,7 +82,3 @@ test('alphamap values are computed independently between runs', function(t) {
 
     t.end();
 });
-
-test('repeating values', function(t) {
-    t.end()
-});

@@ -6,8 +6,6 @@
 'use strict';
 
 var colorScale = require('./colorScale');
-var isPlainObject = require('is-plain-obj');
-var clamp = require('clamp');
 var lerp = require('lerp')
 
 module.exports = createColormap;
@@ -24,7 +22,7 @@ function createColormap (spec) {
         b = [],
         a = [];
 
-    if ( !isPlainObject(spec) ) spec = {};
+    if ( !spec ) spec = {};
 
     nshades = (spec.nshades || 72) - 1;
     format = spec.format || 'hex';
@@ -76,8 +74,8 @@ function createColormap (spec) {
     });
 
     // Add alpha channel to the map
-    alpha[0] = clamp(alpha[0], 0, 1);
-    alpha[1] = clamp(alpha[1], 0, 1);
+    alpha[0] = Math.min(Math.max(alpha[0], 0), 1);
+    alpha[1] = Math.min(Math.max(alpha[1], 0), 1);
 
     var steps = cmap.map(function(c, i) {
         var index = cmap[i].index
