@@ -1,5 +1,24 @@
-var colormap = require('../.'),
-    test = require('tap').test;
+var colormap = require('.'),
+    test = require('tape');
+
+
+test('is object - object', function(t) {
+  t.plan(1);
+  var n = 15,
+      cg,
+      check = true;
+
+    // Display all the colormaps
+    var cms = ['jet', 'hsv' ,'hot', 'cool', 'spring', 'summer', 'autumn',
+               'winter', 'greys', 'bone', 'copper'];
+
+    for (var i = 0; i < cms.length; i++) {
+        cg = colormap({'colormap': cms[i], 'nshades': n });
+        check = check & (cg.length == n);
+    }
+
+    t.ok(check);
+});
 
 test('alpha config creates rgba arrays with correct alpha', function (t) {
 

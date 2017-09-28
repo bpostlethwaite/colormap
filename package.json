@@ -1,23 +1,18 @@
 {
   "name": "colormap",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Great looking color maps",
   "author": "bpostlethwaite",
   "dependencies": {
-    "arraytools": "^1.1.2",
-    "clone": "^1.0.2"
+    "lerp": "^1.0.3"
   },
   "devDependencies": {
     "color-space": "^1.14.3",
-    "tap": "^5.1"
+    "tape": "^4.7.0"
   },
-  "files": [
-    "index.js",
-    "colorScales.js"
-  ],
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js",
+    "test": "node test.js",
     "build": "browserify example/example.js -o example/bundle.js",
     "draw": "budo test/draw.js"
   },

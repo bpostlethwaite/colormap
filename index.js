@@ -5,9 +5,8 @@
  */
 'use strict';
 
-var at = require('arraytools');
-var clone = require('clone');
-var colorScale = require('./colorScales');
+var colorScale = require('./colorScale');
+var lerp = require('lerp')
 
 module.exports = createColormap;
 
@@ -23,9 +22,9 @@ function createColormap (spec) {
         b = [],
         a = [];
 
-    if ( !at.isPlainObject(spec) ) spec = {};
+    if ( !spec ) spec = {};
 
-    nshades = spec.nshades || 72;
+    nshades = (spec.nshades || 72) - 1;
     format = spec.format || 'hex';
 
     colormap = spec.colormap;
@@ -38,10 +37,10 @@ function createColormap (spec) {
             throw Error(colormap + ' not a supported colorscale');
         }
 
-        cmap = clone(colorScale[colormap]);
+        cmap = colorScale[colormap];
 
     } else if (Array.isArray(colormap)) {
-        cmap = clone(colormap);
+        cmap = colormap.slice();
 
     } else {
         throw Error('unsupported colormap option', colormap);
@@ -66,59 +65,72 @@ function createColormap (spec) {
         alpha = [1, 1];
 
     } else {
-        alpha = clone(spec.alpha);
+        alpha = spec.alpha.slice();
     }
 
-    /*
-     * map index points from 0->1 to 0 -> n-1
-     */
+    // map index points from 0..1 to 0..n-1
     indicies = cmap.map(function(c) {
         return Math.round(c.index * nshades);
     });
 
-    /*
-     * Add alpha channel to the map
-     */
-    if (alpha[0] < 0) alpha[0] = 0;
-    if (alpha[1] < 0) alpha[0] = 0;
-    if (alpha[0] > 1) alpha[0] = 1;
-    if (alpha[1] > 1) alpha[0] = 1;
+    // Add alpha channel to the map
+    alpha[0] = Math.min(Math.max(alpha[0], 0), 1);
+    alpha[1] = Math.min(Math.max(alpha[1], 0), 1);
 
-    for (i = 0; i < indicies.length; ++i) {
-        index = cmap[i].index;
-        rgba = cmap[i].rgb;
+    var steps = cmap.map(function(c, i) {
+        var index = cmap[i].index
+
+        var rgba = cmap[i].rgb.slice();
 
         // if user supplies their own map use it
-        if (rgba.length === 4 && rgba[3] >= 0 && rgba[3] <= 1) continue;
+        if (rgba.length === 4 && rgba[3] >= 0 && rgba[3] <= 1) {
+            return rgba
+        }
         rgba[3] = alpha[0] + (alpha[1] - alpha[0])*index;
-    }
+
+        return rgba
+    })
+
 
     /*
      * map increasing linear values between indicies to
      * linear steps in colorvalues
      */
+    var colors = []
     for (i = 0; i < indicies.length-1; ++i) {
         nsteps = indicies[i+1] - indicies[i];
-        fromrgba = cmap[i].rgb;
-        torgba = cmap[i+1].rgb;
-        r = r.concat(at.linspace(fromrgba[0], torgba[0], nsteps ) );
-        g = g.concat(at.linspace(fromrgba[1], torgba[1], nsteps ) );
-        b = b.concat(at.linspace(fromrgba[2], torgba[2], nsteps ) );
-        a = a.concat(at.linspace(fromrgba[3], torgba[3], nsteps ) );
+        fromrgba = steps[i];
+        torgba = steps[i+1];
+
+        for (var j = 0; j < nsteps; j++) {
+            var amt = j / nsteps
+            colors.push([
+                Math.round(lerp(fromrgba[0], torgba[0], amt)),
+                Math.round(lerp(fromrgba[1], torgba[1], amt)),
+                Math.round(lerp(fromrgba[2], torgba[2], amt)),
+                lerp(fromrgba[3], torgba[3], amt)
+            ])
+        }
     }
 
-    r = r.map( Math.round );
-    g = g.map( Math.round );
-    b = b.map( Math.round );
-
-    colors = at.zip(r, g, b, a);
+    //add 1 step as last value
+    colors.push(cmap[cmap.length - 1].rgb.concat(alpha[1]))
 
     if (format === 'hex') colors = colors.map( rgb2hex );
-    if (format === 'rgbaString') colors = colors.map( rgbaStr );
+    else if (format === 'rgbaString') colors = colors.map( rgbaStr );
+    else if (format === 'float') colors = colors.map( rgb2float );
 
     return colors;
 };
 
+function rgb2float (rgba) {
+    return [
+        rgba[0] / 255,
+        rgba[1] / 255,
+        rgba[2] / 255,
+        rgba[3]
+    ]
+}
 
 function rgb2hex (rgba) {
     var dig, hex = '#';
