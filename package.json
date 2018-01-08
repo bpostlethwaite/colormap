@@ -8,13 +8,15 @@
   },
   "devDependencies": {
     "color-space": "^1.14.3",
-    "tape": "^4.7.0"
+    "tape": "^4.7.0",
+    "webpack": "^3.10.0",
+    "uglify-js": "^3.3.5",
+    "uglifyjs-webpack-plugin": "^1.1.6"
   },
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "build": "browserify example/example.js -o example/bundle.js",
-    "draw": "budo test/draw.js"
+    "build": "webpack"
   },
   "testling": {
     "files": "test/*.js",

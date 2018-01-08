@@ -1,4 +1,5 @@
 lib-cov
+package-lock.json
 *.seed
 *.log
 *.csv
@@ -8,6 +9,7 @@ lib-cov
 *.gz
 
 node_modules/*
+dist/**
 .c9revisions/*
 bundle.js
 
