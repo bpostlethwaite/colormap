@@ -10,7 +10,7 @@
 let colormap = require('colormap')
 
 let colors = colormap({
-    colormap: 'jet'
+    colormap: 'jet',
     nshades: 10,
     format: 'hex',
     alpha: 1
