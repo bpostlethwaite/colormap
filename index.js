@@ -14,13 +14,9 @@ function createColormap (spec) {
     /*
      * Default Options
      */
-    var indicies, rgba, fromrgba, torgba,
+    var indicies, fromrgba, torgba,
         nsteps, cmap, colormap, format,
-        nshades, colors, alpha, index, i,
-        r = [],
-        g = [],
-        b = [],
-        a = [];
+        nshades, colors, alpha, i;
 
     if ( !spec ) spec = {};
 
@@ -46,7 +42,7 @@ function createColormap (spec) {
         throw Error('unsupported colormap option', colormap);
     }
 
-    if (cmap.length > nshades) {
+    if (cmap.length > nshades + 1) {
         throw new Error(
             colormap+' map requires nshades to be at least size '+cmap.length
         );
