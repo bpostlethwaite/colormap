@@ -1,6 +1,6 @@
 {
   "name": "colormap",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Great looking color maps",
   "author": "bpostlethwaite",
   "dependencies": {
