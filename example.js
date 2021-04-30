@@ -8,7 +8,7 @@ var cmap = require('.'),
         'copper','greys','YIGnBu','greens','YIOrRd','bluered','RdBu','picnic',
         'rainbow','portland','blackbody','earth','electric',
 
-        'viridis', 'inferno', 'magma', 'plasma', 'warm', 'cool', 'rainbow-soft',
+        'viridis', 'inferno', 'magma', 'plasma', 'warm', 'rainbow-soft',
 
         'bathymetry', 'cdom', 'chlorophyll', 'density', 'freesurface-blue', 'freesurface-red', 'oxygen', 'par', 'phase', 'salinity', 'temperature', 'turbidity', 'velocity-blue', 'velocity-green',
 
