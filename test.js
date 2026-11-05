@@ -82,3 +82,25 @@ test('alphamap values are computed independently between runs', function(t) {
 
     t.end();
 });
+
+test('supports YlOrRd and YlGnBu colorbrewer names and legacy aliases', function(t) {
+    var ylorrd = colormap({ colormap: 'YlOrRd', nshades: 72 });
+    var yiorrd = colormap({ colormap: 'YIOrRd', nshades: 72 });
+    t.same(ylorrd, yiorrd, 'YlOrRd matches legacy YIOrRd');
+
+    var ylgnbu = colormap({ colormap: 'YlGnBu', nshades: 72 });
+    var yignbu = colormap({ colormap: 'YIGnBu', nshades: 72 });
+    t.same(ylgnbu, yignbu, 'YlGnBu matches legacy YIGnBu');
+
+    t.end();
+});
+
+test('all supported colormaps can be loaded', function(t) {
+    var colorScale = require('./colorScale');
+    var keys = Object.keys(colorScale);
+    for (var i = 0; i < keys.length; i++) {
+        var colors = colormap({ colormap: keys[i], nshades: 72 });
+        t.equal(colors.length, 72, keys[i] + ' returned correct number of shades');
+    }
+    t.end();
+});
